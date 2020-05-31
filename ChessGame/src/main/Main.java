@@ -12,17 +12,19 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		Player player1 = new Player(true);
+		//creating two instancces of player one with white value of true, and other with false.(white and black player)
+		Player player1 = new Player(true); 
 		Player player2 = new Player(false);
-		Board board = initilizeBoard(player1, player2);
+		//Placing all the Pieeces on the board.
+		Board board = initilizeBoard(player1, player2); 
 		
 		
 		Scanner input = new Scanner(System.in);
 		
 		
-		boolean gameRuns = true;
+		boolean gameRuns = true;  //infinite loop to keep the game running.
 		boolean iswhite = true;  // game will start with white player's turn
-		//an infinite loop to keep the game running
+		
 		System.out.println("How to Play :");
 		System.out.println("1. Player Name contains two characters, a number as its Id followed by a Alphabet as its name/type");
 		System.out.println("2. The x or y positions that user enters can only be numbers between 0 and 7 as labelled on the board");
@@ -53,11 +55,11 @@ public class Main {
 				
 				System.out.print("Enter x position(Input Invalid Position to Stop this Move): ");
 				//int askx = input.nextInt();
-				int askx;
+				int askx; 
 				try{askx = parseInt(input.next());} //parseInt method is defined below
-				catch(RuntimeException ex) {
+				catch(RuntimeException ex) { //catch for the invalid destination on the board.
 					System.out.println(ex.getMessage());
-					continue;
+					continue;  //continue to the top line, to restart the move all over again. (Maybe player decided to move some other piece)
 				}
 				
 				System.out.print("Enter y position(Input Invalid Position to Stop this Move): ");
@@ -69,7 +71,8 @@ public class Main {
 					continue;
 				}
 				
-				input.nextLine();
+				input.nextLine(); 
+				//player 1
 				if (iswhite) {	
 					boolean movemade = player1.makemove(board, askx, asky, piecesitting);
 					if (!movemade) {
@@ -85,9 +88,10 @@ public class Main {
 					iswhite = false;
 					
 				}
+				//player 2
 				else {
 					boolean movemade = player2.makemove(board, askx, asky, piecesitting);
-					//when the player2 turn is complete then set the iswhite to true (player 1 turn comes next)			
+								
 					if (!movemade) {
 						System.out.println("Cannot make this move");
 						continue;
@@ -97,6 +101,7 @@ public class Main {
 						System.out.println("The Game is Over, Player 2 wins");
 						break;
 					}
+					//when the player2 turn is complete then set the iswhite to true (player 1 turn comes next)
 					iswhite = true;
 				}
 			}
